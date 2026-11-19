@@ -6,7 +6,8 @@ from common.pretty_json_response import PrettyJSONResponse
 from common.screen_utils import clear_console
 from routers import (
     health_controller, 
-    student_controller
+    student_controller,
+    classes_controller
 )
 
 from app_logging.logging_config import setup_logging
@@ -50,6 +51,7 @@ async def favicon():
 
 app.include_router(health_controller.router, prefix="/health", tags=["health"])
 app.include_router(student_controller.router, prefix="/students", tags=["students"])
+app.include_router(classes_controller.router, prefix="/classes", tags=["classes"])
 
 clear_console()
 

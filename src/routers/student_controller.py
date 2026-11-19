@@ -18,7 +18,7 @@ def get_student_service() -> StudentService:
     try:
         repo = StudentRepositoryFactory.create()
     except ValueError as exc:
-        raise HTTPException(status_code=500, detail=str(exc))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(exc))
     return StudentService(repo)
 
 #--------------------------------------------------------------------

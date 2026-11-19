@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Students (
 """)
 
 cursor.execute("""
-CREATE TABLE IF NOT EXISTS AvailableClasses (
+CREATE TABLE IF NOT EXISTS SchoolClasses (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     ClassName TEXT NOT NULL,
     Description TEXT,
