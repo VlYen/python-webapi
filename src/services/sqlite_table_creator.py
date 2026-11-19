@@ -42,5 +42,19 @@ CREATE TABLE IF NOT EXISTS Students (
 )
 """)
 
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS AvailableClasses (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ClassName TEXT NOT NULL,
+    Description TEXT,
+    Instructor TEXT,
+    StartDate TEXT,
+    EndDate TEXT,
+    Capacity INTEGER,
+    IsActive INTEGER NOT NULL DEFAULT 1,
+    CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+""")
+
 conn.commit()
 conn.close()
