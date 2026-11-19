@@ -16,6 +16,11 @@ rm -rf myenv
 source myenv/Scripts/activate
 ```
 
+### Activate virtual environment on the Mac
+```sh
+source myenv/bin/activate
+```
+
 ### PS
 ```powershell
 .\myenv\Scripts\activate
