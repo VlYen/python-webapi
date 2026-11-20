@@ -10,7 +10,7 @@ unset PYTHONPATH
 echo $PYTHONPATH
 ```
 
-### run w/o reload and specified
+### run w/o reload and specified port
 ```sh
 #uvicorn main:app
 uvicorn src.main:app --port 8111

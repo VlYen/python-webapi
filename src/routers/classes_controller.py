@@ -88,3 +88,45 @@ def create(
         return {"error": str(e)}
     finally:
         pass       
+
+#--------------------------------------------------------------------
+@router.put("")
+def update(
+    school_class: SchoolClassModel, 
+    response: Response,
+    service: SchoolClassService = Depends(get_classes_service)
+    ):
+    try:
+        rows_updated = service.update(school_class)
+        if rows_updated > 0:
+            response.status_code = status.HTTP_200_OK
+            return {"message": "Class updated successfully"}
+        else:
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return {"error": "Class not found"}
+    except Exception as e:
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        return {"error": str(e)}
+    finally:
+        pass     
+
+#--------------------------------------------------------------------
+@router.delete("/{class_id}")
+def delete(
+   class_id: int, 
+   response: Response,
+   service: SchoolClassService = Depends(get_classes_service)
+   ):
+   try:
+      rows_deleted = service.delete(class_id)
+      if rows_deleted > 0:
+         response.status_code = status.HTTP_200_OK
+         return {"message": "Class deleted successfully"}
+      else:
+         response.status_code = status.HTTP_404_NOT_FOUND
+         return {"error": "Class not found"}
+   except Exception as e:
+      response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+      return {"error": str(e)}
+   finally:
+      pass    
