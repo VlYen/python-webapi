@@ -65,11 +65,13 @@ class SqlLiteSchoolClassRepository:
          cursor = self.connection.cursor()
          query = """
             INSERT INTO SchoolClasses 
-            (Name, Teacher, Room) 
-            VALUES (?, ?, ?)
+            (ClassName, Description, Instructor, StartDate, EndDate, Capacity, IsActive) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
          """
          cursor.execute(query,
-            (school_class.Name, school_class.Teacher, school_class.Room)
+            (school_class.ClassName, school_class.Description, school_class.Instructor, 
+               school_class.StartDate, school_class.EndDate, 
+               school_class.Capacity, school_class.IsActive)
          )
          row = cursor.fetchone()
          self.connection.commit()
@@ -96,12 +98,12 @@ class SqlLiteSchoolClassRepository:
          cursor = self.connection.cursor()
          query = """
             UPDATE SchoolClasses 
-            SET Name = ?, Teacher = ?, Room = ? 
+            SET ClassName = ?, Description = ?, Instructor = ?, StartDate = ?, EndDate = ?, Capacity = ?, IsActive = ?
             WHERE Id = ?
          """ 
          cursor.execute(
                query,
-               (school_class.Name, school_class.Teacher, school_class.Room, school_class.Id)
+               (school_class.ClassName, school_class.Description, school_class.Instructor, school_class.StartDate, school_class.EndDate, school_class.Capacity, school_class.IsActive, school_class.Id)
          )
          self.connection.commit()
          return cursor.rowcount  # Returns the number of rows updated

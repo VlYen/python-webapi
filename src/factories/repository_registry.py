@@ -10,6 +10,7 @@ from models.student_model import StudentModel
 
 @lru_cache
 def get_repository_factory() -> RepositoryFactory:
+    """Provides a cached instance of RepositoryFactory with registered repositories."""
     factory = RepositoryFactory()
     factory.register(
         SchoolClassModel,
