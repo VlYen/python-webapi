@@ -1,14 +1,12 @@
-import os
 import logging
-from factories.connection_factory import ConnectionFactory
+from factories.RepositoryFactory import RepositoryFactory
 from models.student_model import StudentModel
-from repositories import StudentRepository
 
 logger = logging.getLogger(__name__)
 
 class StudentService:
-   def __init__(self, repo: StudentRepository):
-      self.repo = repo    
+   def __init__(self, factory: RepositoryFactory):
+      self.repo = factory.get_repository(StudentModel)
 
    def list_students(self) -> list[StudentModel]:
       return self.repo.list_students()

@@ -1,7 +1,6 @@
 import logging
-from factories import RepositoryFactory
+from factories.RepositoryFactory import RepositoryFactory
 from models.school_class_model import SchoolClassModel
-from repositories.ProtocolRepository import ProtocolRepository
 
 logger = logging.getLogger(__name__)
 

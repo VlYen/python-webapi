@@ -1,8 +1,9 @@
 from functools import lru_cache
 
 from factories.RepositoryFactory import RepositoryFactory
-from factories.school_class_repository_factory import SchoolClassRepositoryFactory
-from factories.student_repository_factory import StudentRepositoryFactory
+from factories.connection_factory import ConnectionFactory
+from repositories.SqlLiteSchoolClassRepository import SqlLiteSchoolClassRepository
+from repositories.SqlLiteStudentRepository import SqlLiteStudentRepository
 from models.school_class_model import SchoolClassModel
 from models.student_model import StudentModel
 
@@ -10,6 +11,12 @@ from models.student_model import StudentModel
 @lru_cache
 def get_repository_factory() -> RepositoryFactory:
     factory = RepositoryFactory()
-    factory.register(SchoolClassModel, SchoolClassRepositoryFactory.create)
-    factory.register(StudentModel, StudentRepositoryFactory.create)
+    factory.register(
+        SchoolClassModel,
+        lambda: SqlLiteSchoolClassRepository(ConnectionFactory.get_connection())
+    )
+    factory.register(
+        StudentModel,
+        lambda: SqlLiteStudentRepository(ConnectionFactory.get_connection())
+    )
     return factory

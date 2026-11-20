@@ -1,13 +1,11 @@
 import os
 import logging
-from repositories.StudentRepository import StudentRepository
 from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException, Response, status
 
 from models.student_model import StudentModel
 from services.student_service import StudentService
-from models.student_model import StudentModel
-from factories.student_repository_factory import StudentRepositoryFactory
+from factories.repository_registry import get_repository_factory
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -15,11 +13,11 @@ logger = logging.getLogger(__name__)
 #--------------------------------------------------------------------
 def get_student_service() -> StudentService:
     """Dependency function to provide a StudentService instance."""
+    factory = get_repository_factory()
     try:
-        repo = StudentRepositoryFactory.create()
+        return StudentService(factory)
     except ValueError as exc:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(exc))
-    return StudentService(repo)
 
 #--------------------------------------------------------------------
 @router.get("")
