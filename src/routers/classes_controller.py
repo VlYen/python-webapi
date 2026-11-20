@@ -1,4 +1,5 @@
 import logging
+from factories.RepositoryFactory import RepositoryFactory
 from repositories.SchoolClassRepository import SchoolClassRepository
 from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException, Response, status
@@ -13,11 +14,12 @@ logger = logging.getLogger(__name__)
 #--------------------------------------------------------------------
 def get_classes_service() -> SchoolClassService:
     """Dependency function to provide a SchoolClassService instance."""
+    from factories.repository_registry import get_repository_factory
+    factory = get_repository_factory()
     try:
-        repo = SchoolClassRepositoryFactory.create()
+        return SchoolClassService(factory)
     except ValueError as exc:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(exc))
-    return SchoolClassService(repo)
+        raise HTTPException(status_code=500, detail=str(exc))
 
 #--------------------------------------------------------------------
 @router.get("")

@@ -5,14 +5,14 @@ logger = logging.getLogger(__name__)
 
 class SqlLiteSchoolClassRepository:
    def __init__(self, connection):
-      logger.info("Initializing SqlLiteProductRepository with provided connection.")
+      logger.info("Initializing SqlLiteSchoolClassRepository with provided connection.")
       if connection is None:
          logger.error("Connection cannot be None.")
          raise ValueError("Connection cannot be None.")
       self.connection = connection
 
    #--------------------------------------------------------------------
-   def list_classes(self) -> list[SchoolClassModel]:
+   def list(self) -> list[SchoolClassModel]:
       try:
          # cursor = self.connection.cursor()
          import sqlite3
@@ -25,13 +25,13 @@ class SqlLiteSchoolClassRepository:
          rows = cursor.fetchall()
          return [SchoolClassModel(**dict(zip([column[0] for column in cursor.description], row))) for row in rows]
       except Exception as e:
-         logger.error("Error occurred while listing students: %s", e)
+         logger.error("Error occurred while listing classes: %s", e)
          raise e
       finally:
          cursor.close()
 
    #--------------------------------------------------------------------
-   def get_class_by_id(self, class_id) -> SchoolClassModel | None:
+   def get_by_id(self, class_id) -> SchoolClassModel | None:
       try:
          cursor = self.connection.cursor()
 
@@ -44,7 +44,7 @@ class SqlLiteSchoolClassRepository:
          else:
             return None
       except Exception as e:
-         logger.error("Error occurred while getting student by ID: %s", e)
+         logger.error("Error occurred while getting class by ID: %s", e)
          raise e
       finally:
          if cursor:
@@ -55,8 +55,8 @@ class SqlLiteSchoolClassRepository:
       """
       Creates a new class and returns the new class's ID.
 
-      :param:
-         school_class (SchoolClassModel): The class data to insert.
+      :param school_class:
+         (SchoolClassModel): The class data to insert.
 
       :return:
          int: The ID of the newly created class.
@@ -86,8 +86,8 @@ class SqlLiteSchoolClassRepository:
       """
       Updates an existing class.
 
-      :param:
-         school_class (SchoolClassModel): The class data to update.
+      :param school_class:
+         (SchoolClassModel): The class data to update.
 
       :return:
          int: The number of rows updated.
@@ -113,12 +113,12 @@ class SqlLiteSchoolClassRepository:
             cursor.close()
 
    #--------------------------------------------------------------------
-   def delete(self, class_id: int) -> int:
+   def delete(self, id: int) -> int:
       """
       Deletes a class by its ID.
 
-      :param:
-         class_id (int): The ID of the class to delete.
+      :param id:
+         id (int): The ID of the class to delete.
 
       :return:
          int: The number of rows deleted.
@@ -127,9 +127,9 @@ class SqlLiteSchoolClassRepository:
          cursor = self.connection.cursor()
 
          query = "DELETE FROM SchoolClasses WHERE Id = ?"
-         cursor.execute(query, (class_id,))
+         cursor.execute(query, (id,))
          self.connection.commit()
-         logger.info(f"Deleted class with ID {class_id}, rows affected: {cursor.rowcount}")
+         logger.info(f"Deleted class with ID {id}, rows affected: {cursor.rowcount}")
          return cursor.rowcount  # Returns the number of rows deleted
       except Exception as e:
          logger.error("Error occurred while deleting class: %s", e)
