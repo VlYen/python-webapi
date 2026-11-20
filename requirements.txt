@@ -4,7 +4,7 @@
 python-dotenv==1.2.4
 
 # Web framework
-fastapi==0.163.1
+fastapi==0.165.0
 uvicorn==0.54.0
 
 # Database connectivity
@@ -13,6 +13,6 @@ databases==0.9.0 # For async database support
 pyodbc==5.5.0 # open source Python module that makes accessing ODBC databases simple
 
 # Data validation
-pydantic==2.14.3 # For data validation and settings management
+pydantic==2.14.4 # For data validation and settings management
 pydantic-settings==2.16.3 # For managing application settings with Pydantic
 email-validator==2.4.0 # For validating email addresses with Pydantic

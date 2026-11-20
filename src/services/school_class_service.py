@@ -1,20 +1,19 @@
-import os
 import logging
+from factories.RepositoryFactory import RepositoryFactory
 from models.school_class_model import SchoolClassModel
-from repositories import SchoolClassRepository
 
 logger = logging.getLogger(__name__)
 
 class SchoolClassService:
-   def __init__(self, repo: SchoolClassRepository):
-      self.repo = repo    
+   def __init__(self, factory: RepositoryFactory):
+      self.repo = factory.get_repository(SchoolClassModel)
 
    def list_classes(self) -> list[SchoolClassModel]:
-      return self.repo.list_classes()
+      return self.repo.list()
 
    def get_class(self, class_id: int) -> SchoolClassModel | None:
       """Fetch a class by its ID."""
-      return self.repo.get_class_by_id(class_id)
+      return self.repo.get_by_id(class_id)
 
    def create(self, school_class: SchoolClassModel) -> int:
       """Create a new class."""
