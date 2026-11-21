@@ -1,0 +1,32 @@
+[
+    {
+        "Id": 1,
+        "FirstName": "John",
+        "LastName": "Smith",
+        "SSN": "900-12-3456"
+    },
+    {
+        "Id": 2,
+        "FirstName": "Sarah",
+        "LastName": "Johnson",
+        "SSN": "900-23-4567"
+    },
+    {
+        "Id": 3,
+        "FirstName": "Michael",
+        "LastName": "Brown",
+        "SSN": "900-34-5678"
+    },
+    {
+        "Id": 4,
+        "FirstName": "Emily",
+        "LastName": "Davis",
+        "SSN": null
+    },
+    {
+        "Id": 5,
+        "FirstName": "David",
+        "LastName": "Wilson",
+        "SSN": "900-45-6789"
+    }
+]
