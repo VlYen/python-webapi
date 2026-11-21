@@ -1,27 +1,39 @@
-## main way to create a virtual environment using CLI
+# Virtual Environment notes
+
+## Create virtual environment using CLI
 
 ```sh
-# Create a virtual environment named 'venv' in current directory
+# Create a virtual environment named 'venv' in current directory - Windows
 python -m venv myenv
 ```
 
-# Remove the old environment
+```sh
+# Create a virtual environment named 'venv' in current directory - Mac
+python3 -m venv myenv
+```
+
+## Remove the old environment
+
 ```sh
 rm -rf myenv
 ```
 
-## After creating, you need to activate it:
+## After creating, you need to activate it
+
 ### Bash
+
 ```sh
 source myenv/Scripts/activate
 ```
 
 ### Activate virtual environment on the Mac
+
 ```sh
 source myenv/bin/activate
 ```
 
 ### PS
+
 ```powershell
 .\myenv\Scripts\activate
 # Get all running processes and sort by CPU usage
@@ -30,6 +42,7 @@ Get-Process | Sort-Object CPU -Descending | Select-Object -First 10
 
 
 ## To deactivate any virtual environment:
+
 ```sh
 deactivate
 ```
